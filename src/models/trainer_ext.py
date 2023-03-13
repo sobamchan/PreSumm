@@ -2,7 +2,6 @@ import os
 
 import numpy as np
 import torch
-from tensorboardX import SummaryWriter
 
 import distributed
 from models.reporter_ext import ReportMgr, Statistics
@@ -40,9 +39,7 @@ def build_trainer(args, device_id, model, optim):
 
     print('gpu_rank %d' % gpu_rank)
 
-    tensorboard_log_dir = args.model_path
-
-    writer = SummaryWriter(tensorboard_log_dir, comment="Unmt")
+    writer = None
 
     report_manager = ReportMgr(args.report_every, start_time=-1, tensorboard_writer=writer)
 

@@ -7,7 +7,6 @@ import math
 
 import torch
 
-from tensorboardX import SummaryWriter
 
 from others.utils import rouge_results_to_str, test_rouge, tile
 from translate.beam import GNMTGlobalScorer
@@ -70,9 +69,8 @@ class Translator(object):
         self.beam_trace = self.dump_beam != ""
         self.beam_accum = None
 
-        tensorboard_log_dir = args.model_path
 
-        self.tensorboard_writer = SummaryWriter(tensorboard_log_dir, comment="Unmt")
+        self.tensorboard_writer = None
 
         if self.beam_trace:
             self.beam_accum = {

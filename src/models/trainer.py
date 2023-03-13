@@ -1,13 +1,11 @@
 import os
 
-import numpy as np
 import torch
-from tensorboardX import SummaryWriter
 
 import distributed
 from models.reporter import ReportMgr, Statistics
 from others.logging import logger
-from others.utils import test_rouge, rouge_results_to_str
+rom others.utils import test_rouge, rouge_results_to_str
 
 
 def _tally_parameters(model):
@@ -42,11 +40,7 @@ def build_trainer(args, device_id, model, optims,loss):
 
     print('gpu_rank %d' % gpu_rank)
 
-    tensorboard_log_dir = args.model_path
-
-    writer = SummaryWriter(tensorboard_log_dir, comment="Unmt")
-
-    report_manager = ReportMgr(args.report_every, start_time=-1, tensorboard_writer=writer)
+    report_manager = ReportMgr(args.report_every, start_time=-1, tensorboard_writer=None)
 
 
     trainer = Trainer(args, model, optims, loss, grad_accum_count, n_gpu, gpu_rank, report_manager)
