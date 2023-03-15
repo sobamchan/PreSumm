@@ -116,7 +116,9 @@ def validate_ext(args, device_id):
             max_step = xent_lst.index(min(xent_lst))
             if (i - max_step > 10):
                 break
-        xent_lst = sorted(xent_lst, key=lambda x: x[0])[:3]
+        # Why do we need to perform test with test data for "3" best models?
+        # xent_lst = sorted(xent_lst, key=lambda x: x[0])[:3]
+        xent_lst = sorted(xent_lst, key=lambda x: x[0])[:1]  # Use just single best model
         logger.info('PPL %s' % str(xent_lst))
         for xent, cp in xent_lst:
             step = int(cp.split('.')[-2].split('_')[-1])
