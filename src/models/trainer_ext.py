@@ -246,10 +246,10 @@ class Trainer(object):
                         else:
                             sent_scores, mask = self.model(src, segs, clss, mask, mask_cls)
 
-                            loss = self.loss(sent_scores, labels.float())
-                            loss = (loss * mask.float()).sum()
-                            batch_stats = Statistics(float(loss.cpu().data.numpy()), len(labels))
-                            stats.update(batch_stats)
+                            # loss = self.loss(sent_scores, labels.float())
+                            # loss = (loss * mask.float()).sum()
+                            # batch_stats = Statistics(float(loss.cpu().data.numpy()), len(labels))
+                            # stats.update(batch_stats)
 
                             sent_scores = sent_scores + mask.float()
                             sent_scores = sent_scores.cpu().data.numpy()
